@@ -9,6 +9,7 @@ The indicator does **not** compute the levels itself. It parses a string you pas
 ## Features
 
 ### Levels drawn on the chart
+
 - **Call Wall** — strongest positive gamma strike
 - **Put Wall** — strongest negative gamma strike
 - **Vol Trigger** — implied volatility regime threshold
@@ -17,10 +18,12 @@ The indicator does **not** compute the levels itself. It parses a string you pas
 - **Zero Gamma** — gamma flip point (default: dotted line)
 
 ### Table-only entries (rendered in the bottom-right table, not plotted)
+
 - **1D Est** — 1-day estimated move (%)
 - **5D Est** — 5-day estimated move (%)
 
 ### UI / customization
+
 - **Per-level styling**: each level has its own color, line width, dash style, label size, and label alignment (left / right of the chart)
 - **Bottom-right info table** showing every level with its current value
   - Toggle on/off
@@ -29,6 +32,7 @@ The indicator does **not** compute the levels itself. It parses a string you pas
 - **Live updates**: changing the data string, symbol or any styling refreshes the chart immediately
 
 ### Supported symbols
+
 `SPX`, `SPY`, `NDX`, `QQQ`, `RUT`, `IWM`, `ES1!`, `MES1!`, `NQ1!`, `MNQ1!`, `RTY1!`, `M2K1!`
 
 ---
@@ -36,10 +40,12 @@ The indicator does **not** compute the levels itself. It parses a string you pas
 ## Installation
 
 ### Prerequisites
+
 - **ATAS Platform** (developed against version `8.0.13.384`, installed at `C:\Program Files (x86)\ATAS Platform\`)
 - **.NET 10 SDK** — only required if you build from source
 
 ### Option A — Use the precompiled DLL (recommended)
+
 1. Download [`dist/SpotGammaLevels.dll`](dist/SpotGammaLevels.dll)
    (direct download: <https://github.com/xentres86/SpotGammaATAS/raw/main/dist/SpotGammaLevels.dll>)
 2. Copy it into `%APPDATA%\ATAS\Indicators\`
@@ -49,12 +55,14 @@ The indicator does **not** compute the levels itself. It parses a string you pas
 > **Important:** ATAS scans `%APPDATA%\ATAS\Indicators\` — **not** `Documents\ATAS\Indicators\`. Dropping the DLL into the wrong folder will silently do nothing.
 
 ### Option B — Build from source
+
 ```bash
 git clone https://github.com/xentres86/SpotGammaATAS.git
 cd SpotGammaATAS
 dotnet build SpotGammaLevels.csproj -c Release
 ```
-The build automatically deploys the compiled DLL into `%APPDATA%\ATAS\Indicators\`. Restart ATAS afterwards.
+
+The build automatically deploys the compiled DLL into `%APPDATA%\ATAS\Indicators\` and refreshes `dist/SpotGammaLevels.dll`. Restart ATAS afterwards.
 
 If your ATAS install path is different from `C:\Program Files (x86)\ATAS Platform\`, edit the `<AtasDir>` property at the top of [`SpotGammaLevels.csproj`](SpotGammaLevels.csproj).
 
@@ -77,7 +85,7 @@ The levels appear immediately on the chart, and the summary table populates in t
 
 The data string is comma-separated and may contain multiple symbol blocks back-to-back. Each block consists of **16 tokens**:
 
-```
+```text
 $SYM, SYM, CallWall, PutWall, VolTrigger, L1, L2, L3, L4, C1, C2, C3, C4, 1DayEstMove, 5DayEstMove, ZeroGamma
 ```
 
@@ -129,17 +137,19 @@ All colors and line styles are user-configurable in the indicator settings via A
   - `OFT.Attributes.dll`, `OFT.Core.dll`, `OFT.Rendering.dll`, `OFT.Localization.dll`
   - `Utils.Common.dll`
   - All marked `<Private>false</Private>` so they are not copied into the output
-- **Post-build**: compiled DLL is copied to `%APPDATA%\ATAS\Indicators\` automatically
+- **Post-build**: compiled DLL is copied to `%APPDATA%\ATAS\Indicators\` and to `dist/` automatically
 
 ---
 
 ## Project structure
 
-```
+```text
 .
 ├── SpotGamma.sln              # Visual Studio solution
 ├── SpotGammaLevels.csproj     # Build configuration + ATAS SDK references
 ├── SpotGammaLevels.cs         # All indicator code in a single file
+├── dist/
+│   └── SpotGammaLevels.dll    # Latest precompiled binary (auto-refreshed by Release build)
 ├── .gitignore
 └── README.md
 ```
