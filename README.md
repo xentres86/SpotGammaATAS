@@ -39,8 +39,9 @@ The indicator does **not** compute the levels itself. It parses a string you pas
 - **ATAS Platform** (developed against version `8.0.13.384`, installed at `C:\Program Files (x86)\ATAS Platform\`)
 - **.NET 10 SDK** — only required if you build from source
 
-### Option A — Use a precompiled DLL
-1. Grab `SpotGammaLevels.dll` from a release (or build it yourself, see below)
+### Option A — Use the precompiled DLL (recommended)
+1. Download [`dist/SpotGammaLevels.dll`](dist/SpotGammaLevels.dll)
+   (direct download: <https://github.com/xentres86/SpotGammaATAS/raw/main/dist/SpotGammaLevels.dll>)
 2. Copy it into `%APPDATA%\ATAS\Indicators\`
    (i.e. `C:\Users\<you>\AppData\Roaming\ATAS\Indicators\`)
 3. Restart ATAS (or reload indicators)

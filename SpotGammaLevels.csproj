@@ -62,4 +62,15 @@
           SkipUnchangedFiles="false" />
   </Target>
 
+  <!-- Also copy into the repo's dist/ folder so the precompiled DLL stays in sync for download from GitHub -->
+  <Target Name="DeployToDist" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <DistDir>$(MSBuildProjectDirectory)\dist</DistDir>
+    </PropertyGroup>
+    <MakeDir Directories="$(DistDir)" Condition="!Exists('$(DistDir)')" />
+    <Copy SourceFiles="$(TargetPath)"
+          DestinationFolder="$(DistDir)"
+          SkipUnchangedFiles="false" />
+  </Target>
+
 </Project>
